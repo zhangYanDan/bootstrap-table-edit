@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo</title>
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <script src="dist/js/jquery-2.1.1.min.js"></script>
+    <!--<script src="dist/js/bootstrap.js"></script>-->
+    <style>
+        .glyphicon{color:#3276b1;padding:0 5px;cursor: pointer;}
+        .glyphicon-plus{color:#888;}
+        table tr .form-control{border:0;background:#fff;}
+    </style>
+</head>
+<body>
+<table class="table">
+    <caption>基本的表格布局 <i class="glyphicon glyphicon-plus pull-right"></i></caption>
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>城市</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" readonly class="form-control" value="Tanmay"></td>
+        <td><input type="text" readonly class="form-control" value="Bangalore"></td>
+        <td><i class="glyphicon glyphicon-pencil"></i><i class="glyphicon glyphicon-remove"></i></td>
+    </tr>
+    <tr>
+        <td><input type="text" readonly class="form-control" value="Sachin"></td>
+        <td><input type="text" readonly class="form-control" value="Mumbai"></td>
+        <td><i class="glyphicon glyphicon-pencil"></i><i class="glyphicon glyphicon-remove"></i></td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    $(function(){
+        var tdTemple='<tr><td><input type="text" class="form-control" value="" placeholder="请输入"></td><td><input type="text" class="form-control" value="" placeholder="请输入"></td><td><i class="glyphicon glyphicon-pencil"></i><i class="glyphicon glyphicon-remove"></i></td></tr>';
+        $("table").on("click",".glyphicon-plus",function(){ //点击添加图标 在表格后面加一行
+            $("table tbody").append($(tdTemple));
+        });
+        $("table").on("click",".glyphicon-remove",function(){//点击删除图标 删除一整行
+            $(this).parent().parent().remove();
+        });
+        $("table").on("click",".glyphicon-pencil",function(){  //点击修改图标 解除只读状态
+            $(this).parent().parent().find("input").removeAttr("readonly");
+            $(this).parent().parent().find("td:nth-child(1) input").focus();
+        });
+        $("table").on("blur","input",function(){ //input失去焦点变成只读状态
+            $(this).attr("readonly","readonly")
+        })
+
+    })
+</script>
+</body>
+</html>
